@@ -1,14 +1,14 @@
 import React from "react";
 import Test from "../Public/Carousel/Carousel";
 import PropTypes from "prop-types";
+import MediaCard from "../Public/Card/Card";
 
 function Content(props) {
     return(
         <div className=" container-fluid p-re" style={{marginTop: 30}}>
-            <h3>{props.title}</h3>
-            <div className="line"/>
-            <hr/>
-            <Test data={props.data}/>
+            {props.data === "salad" ?
+                <MediaCard data={props.data}/> : <Test data={props.data} />
+            }
         </div>
     )
 }

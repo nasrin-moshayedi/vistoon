@@ -1,36 +1,80 @@
 import React from "react";
-import HeaderImage from "./../../Images/HomeHeader.jpg";
-import "./../../Styles/header.scss";
-import Grid from "@material-ui/core/Grid";
-import Test from "../Public/Carousel/Carousel";
-import {Button} from "@material-ui/core";
+import "./../../Styles/menu.scss";
+import logo from "./../../Images/nav-dark-dotted.png"
+import {Link, Route, Switch} from "react-router-dom";
+import SvgIcon from '@material-ui/core/SvgIcon';
+import CustomizedInputBase from "../Public/Search/Serach";
+import cartIcon from "./../../Images/header-cart-ic.jpg";
+import heart from "./../../Images/header-heart-ic.jpg";
+import square from "./../../Images/header-square-ic.jpg";
+function HomeIcon(props) {
+    return (
+        <SvgIcon {...props}>
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+        </SvgIcon>
+    );
+}
+class Header extends React.Component{
+    state ={className:"" };
 
-function Header() {
-    return(
-        <div style={{marginTop: 80}}>
-            <div className=" header-container">
-                <div className="h-100">
-                    <Grid className="position-relative d-flex flex-row justify-content-between">
-                        <div className="position-absolute " style={{top: 50, left: 50}}>
-                            <div className="font-weight-bold text-dark" style={{fontSize: 30}}>
-                                Breakfast Special
-                            </div>
-                            <div className="text-dark" style={{fontSize: 18, letterSpacing: 0}}>
-                                Get 15% off when you order 3 or more Blueberry Pancake Breakfast
-                            </div>
-                        </div>
-                        <div className="position-absolute" style={{top: 400, left: 50}}>
-                            <Button className="btn">
-                                USE Chief special
-                            </Button>
-                        </div>
-                    </Grid>
+    componentDidMount(){
+        window.addEventListener("scroll", this.handleScroll);
+    }
+
+    handleScroll=()=>{
+        if (window.pageYOffset > 0) {
+            if(!this.state.className){
+                this.setState({ className: "grey" });
+            }
+        }else{
+            if(this.state.className){
+                this.setState({ className: "" });
+            }
+        }
+
+    };
+
+    render() {
+        return (
+            <div className={["menu-container", "header", this.state.className].join(" ")}>
+                <div className="container-fluid d-flex align-items-center justify-content-between p-re">
+                    <div className="p-1 d-flex justify-content-center align-items-center">
+                        <p className="m-0">
+                            فرم سفارش همکاری
+                        </p>
+                        <img src={logo} alt="logo" className="img-fluid ml-2"/>
+                    </div>
+                    <div className="d-flex align-items-center ">
+                        <Link to="/" className="header-link p-2">نرم افزار</Link>
+                        <Link to="/" className="header-link p-2">نرم افزار</Link>
+                        <Link to="/" className="header-link p-2">نرم افزار</Link>
+                        <Link to="/" className="header-link p-2">نرم افزار</Link>
+                        <Link to="/" className="header-link p-2">نرم افزار</Link>
+                        <Link to="/" className="header-link p-2">نرم افزار</Link>
+                        <Link to="/" className="header-link p-2">نرم افزار</Link>
+                        <Link to="/" className="header-link p-2">نرم افزار</Link>
+                        <Link to="/" className="header-link p-2">نرم افزار</Link>
+                        <Link to="/" className="header-link p-2">نرم افزار</Link>
+                        <Link to="/" className="header-link p-2 d-flex justify-content-center align-items-center">
+                            <HomeIcon className="mr-2" style={{color: "#ffb100e3"}}/>
+                            <p className="m-0">
+                                صفحه اصلی
+                            </p>
+                        </Link>
+                    </div>
+                    <Switch>
+                        <Route path="/" render={() => console.log("cart")}/>
+                        <Route path="/login" component={() => console.log("login")}/>
+                        <Route path="/signup" component={() => console.log("signup")}/>
+                        <Route path="/reservation" component={() => console.log("reservation")}/>
+                        <Route path="/orders" component={() => console.log("orders")}/>
+                        <Route path="/location" component={() => console.log("location")}/>
+                    </Switch>
                 </div>
+                {/*</div>*/}
             </div>
-        </div>
-
-
-    )
+        )
+    }
 }
 
 export default Header;
